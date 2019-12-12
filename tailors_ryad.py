@@ -1,10 +1,10 @@
 import math
 
-iterations = 50
+iterations = 100
 
 def my_exp(x):
     """Вычисление экспоненты при помощи частичного суммирования ряда Тейлора"""
-    x_pow = x
+    x_pow = 1
     multiplier = 1
     partial_sum = 1
     for n in range(1, iterations):
