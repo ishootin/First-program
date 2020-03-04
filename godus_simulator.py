@@ -10,7 +10,6 @@ from typing import List
 from numpy import array as vec
 import numpy.linalg
 import matplotlib.pyplot as plt
-import matplotlib.axess
 
 
 class Body:
@@ -52,7 +51,6 @@ class Universe(ABC):
                  ):
         self.G: float = G
         self.collision_distance: float = collision_distance
-
 
     @abstractmethod
     def gravity_flow_dencity_per_1_1(self, dist: float) -> float:
@@ -112,9 +110,10 @@ class UniverseWithBodies(Universe):
     def add_body(self, b: Body):
         self.bodies.append(b)
 
+    @abstractmethod
     def gravity_flow_dencity_per_1_1(self, dist: float) -> float:
         return self.G / (dist ** 2 if dist > self.collision_distance else -self.G / dist ** 3)
-
+    @abstractmethod
     def model_step(self):
         for i in range( len(self.bodies ) ):
             for j in range( len(self.bodies ) ):
@@ -158,11 +157,13 @@ class UniverseWithDimensionsAndBodies(UniverseWithBodies):
 
 if __name__ == '__main__':
 
-    un = UniverseWithDimensionsAndBodies(3, 50, 3.0)
+    dimensions = int(input("Dimensions?" + '\n'))
+
+    un = UniverseWithDimensionsAndBodies(dimensions, 50, 3.0)
 
     MODEL_DELTA_T = 0.01
     TIME_TO_MODEL = 2
-
+    
     bodies = [
         Body(un, 100.0, vec([0.0, 0.0]), vec([0.0, -5.0])),
         Body(un, 100.0, vec([10.0, 0.0]), vec([0.0, 5.0]))
@@ -176,8 +177,8 @@ if __name__ == '__main__':
    
     for i in range( len(un.bodies) ):
         for j in range(int(TIME_TO_MODEL/MODEL_DELTA_T)):
-            x[i][j] = un.bodies[i].position[0]
-            y[i][j] = un.bodies[i].position[1]
+            x[0][i] = un.bodies[i].position[0]
+            y[1][i] = un.bodies[i].position[1]
             un.model_step()
 
     for i in range( len(un.bodies) ):
