@@ -6,7 +6,7 @@ def is_simple(n: 'int'):
     for i in range (2, ceil(sqrt(n))+3):
         if n % i == 0:
             return False
-        return True
-   
+    return True
+
 n= int(input("Число для проверочки на простоту "))
 print(is_simple(n))
