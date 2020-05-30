@@ -15,7 +15,7 @@ def gcd(a,b):
     for i in range (1, k):
         if (u*a1 % b1 == 1):
             v = int((1-u*a1)/b1)
-            return(lil_gcd(a,b),v,u)
+            return(lil_gcd(a,b),u,v)
         else: u=u+1
     return (lil_gcd(a, b), )      
 a: int = int(input("Число номер один"+'\n'))
