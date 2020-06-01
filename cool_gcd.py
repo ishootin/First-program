@@ -21,4 +21,4 @@ def gcd(a,b):
 a: int = int(input("Число номер один"+'\n'))
 b: int = int(input("Число номер два"+'\n'))
 
-print(gcd(a,b))
+print(gcd(a,b)) 
