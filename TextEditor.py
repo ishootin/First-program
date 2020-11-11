@@ -1,7 +1,6 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 import sys
 
-from signaledit import Ui_MainWindow
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
