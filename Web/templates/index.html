@@ -1,8 +1,23 @@
-﻿
-{% block content %}
-<p>По ссылке вы можете применить к csv-файлу алгоритм Гаусса:</p>
-<ul>
-  <li><a href="gauss">Алгоритм Гаусса</a>;</li>
-</ul>
-
-{% endblock %}
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <title>Решение СЛАУ методом Гаусса</title>
+    
+</head>
+    <body>
+	<font size="5">
+        <div class="header">
+            Решение СЛАУ
+        </div>
+        {% if result %}
+            <div id="answer">Ответ: {{result}}</div>
+        {% endif %}
+        <div class="solve">
+            <form action="" method=post enctype=multipart/form-data>
+                <input id="uploud" type=file name=file>
+                <input id="submit" type=submit value=Решить>
+            </form>
+        </div>
+	</font>
+    </body>
+</html>
