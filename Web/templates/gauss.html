@@ -1,0 +1,12 @@
+﻿
+{% block content %}
+<u>Алгоритм Гаусса</u><br><br>
+<p>Загрузите ваш .csv файл:</p>
+<form action="upload.html" method="post" enctype="multipart/form-data">
+    <input type="file" name="fileupload" id="fileToUpload">
+    <input type="submit" value="Upload File" name="submit">
+</form>
+
+<p>Ответ: {{ans}}</p>
+
+{% endblock %}
