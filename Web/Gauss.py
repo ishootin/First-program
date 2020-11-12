@@ -25,7 +25,7 @@ def gauss(filename):
                 for k in range(lr):
                     a[j][i] = a[i][j]-a[j][j]*a[j][i]
     o = [0] * lc
-    for k in range(0, lc):
+    for k in range(lc):
       o[k] = a[lc-1][k]
     return(o)
 
