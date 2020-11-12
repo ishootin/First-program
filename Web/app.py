@@ -1,44 +1,32 @@
-
+import os
 import flask
 import csv
-from primarity import is_prime, euler_func
 from Gauss import gauss
-from flask import Flask, request
+from flask import Flask, request, redirect, url_for
+from werkzeug.utils import secure_filename
 from gevent.pywsgi import WSGIServer
 
 app = Flask(__name__, static_folder="static", static_url_path="", template_folder="templates")
 
-
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def root():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and file.filename.rsplit('.', 1)[1] == 'csv':
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(filename))
+            result = gauss(filename)
+            os.remove(os.path.join(filename))
+            file.close()
+            return flask.render_template(
+                'index.html', result=', '.join(str(e) for e in result)
+            )
     return flask.render_template(
-        'index.html'
+        'index.html', result = False
     )
-
-@app.route('/gauss')
-def Gauss():
-    exampleFile = open('fileupload.csv', encoding = 'UTF-8')
-    exampleReader = csv.reader(exampleFile, delimiter = ';')
-    n = 0
-    for row in exampleReader:
-        n += 0
-    a = numpy.zeros((n,n+1))
-
-    for row in exampleReader:
-        for value in row:
-            a[row][value] = value 
-        print(string)
-    exampleFile.close()
-
-    return flask.render_template(
-        'gauss.html',
-        name = name_param,
-        ans = gauss(name_param),
-        method=request.method
-    )
-    
 
 if __name__ == '__main__':
    http_server = WSGIServer(('', 5000), app)
    http_server.serve_forever() 
    app.run(debug = True, host="0.0.0.0", port="5000")
+

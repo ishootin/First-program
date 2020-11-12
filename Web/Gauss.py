@@ -1,15 +1,31 @@
 import numpy
-from numba import njit
+import flask
+import csv
 
+def gauss(filename):
+    a = list()
+    with open(filename, "r") as file:
+        reader = csv.reader(file, delimiter = ';')
+        for row in reader:
+            a.append(row)
+            
+    lr = len(a[0])
+    lc = len(a)
+    
+    for i in range(lc):
+        for j in range(lr):
+            a[i][j] = int(a[i][j])
 
-#Алгоритм решения СЛАУ (кушает матрицу, выплевывает список(тип данных) решений
-def gauss(a):
-    for i in range(n):
-        a[i] = a[i]/(a[i][i])
-        for j in range(n):
+    for i in range(lc):
+        for j in range(lc):
+            a[i][j] = a[i][j]/(a[i][i])
+    for i in range(lc):
+        for j in range(lc):
             if i != j:
-                a[j] = a[j]-a[i]*a[j][i]
-    b = []
-    for i in range(n):
-        b.append(a[i][n])
-    return(b)
+                for k in range(lr):
+                    a[j][i] = a[i][j]-a[j][j]*a[j][i]
+    o = [0] * lc
+    for k in range(0, lc):
+      o[k] = a[lc-1][k]
+    return(o)
+
